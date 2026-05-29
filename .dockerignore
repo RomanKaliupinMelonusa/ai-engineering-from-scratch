@@ -1,0 +1,11 @@
+# Reduce Docker build context size
+.git
+node_modules
+__pycache__
+*.pyc
+.venv
+venv
+.env
+phases/*/code/__pycache__
+phases/*/code/.venv
+site/data.js
