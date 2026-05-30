@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
@@ -37,6 +37,13 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Install Python dependencies with GPU PyTorch
 COPY requirements.txt /tmp/requirements.txt
+# Install torch without bundled NVIDIA pip packages; cuDNN/NCCL/etc. are already
+# provided system-wide by the cuda:cudnn-devel base image, and downloading them
+# again as pip packages (~3 GB) exhausts Docker Desktop's build storage.
 RUN uv pip install --system --break-system-packages --no-cache \
-    --extra-index-url https://download.pytorch.org/whl/cu124 \
+    --extra-index-url https://download.pytorch.org/whl/cu128 \
+    --no-deps torch torchvision torchaudio
+# Install remaining requirements; torch is already satisfied so the NVIDIA
+# runtime pip packages are never pulled as transitive dependencies.
+RUN uv pip install --system --break-system-packages --no-cache \
     -r /tmp/requirements.txt
