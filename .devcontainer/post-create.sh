@@ -4,8 +4,8 @@ set -e
 echo "=== Post-create setup ==="
 
 # Verify Python packages
-python -c "import numpy; print(f'NumPy {numpy.__version__} OK')"
-python -c "import torch; print(f'PyTorch {torch.__version__} OK')"
+python3 -c "import numpy; print(f'NumPy {numpy.__version__} OK')"
+python3 -c "import torch; print(f'PyTorch {torch.__version__} OK')"
 
 # Install pnpm globally (if node feature didn't)
 if ! command -v pnpm &> /dev/null; then
@@ -15,7 +15,7 @@ fi
 # Verify toolchains
 echo ""
 echo "Toolchain versions:"
-echo "  Python:  $(python --version)"
+echo "  Python:  $(python3 --version)"
 echo "  Node.js: $(node --version)"
 echo "  pnpm:    $(pnpm --version)"
 echo "  Rust:    $(rustc --version)"
