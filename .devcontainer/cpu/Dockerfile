@@ -9,6 +9,8 @@ RUN rm -f /etc/apt/sources.list.d/yarn.list && \
     ffmpeg \
     libsndfile1 \
     libgl1 \
+    tmux \
+    htop \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies with uv (CPU-only PyTorch)

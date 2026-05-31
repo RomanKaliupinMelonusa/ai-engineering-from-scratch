@@ -37,6 +37,12 @@
       }
     }
   },
+  // Windows only: binds %USERPROFILE%\models to /models inside the container.
+  // Mac/Linux users: replace ${localEnv:USERPROFILE} with ${localEnv:HOME}
+  // and ensure ~/models exists on the host before rebuilding.
+  "mounts": [
+    "source=${localEnv:USERPROFILE}/models,target=/models,type=bind,consistency=cached"
+  ],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "remoteUser": "vscode"
 }

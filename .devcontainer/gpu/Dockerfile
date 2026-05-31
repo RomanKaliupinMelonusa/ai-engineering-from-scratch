@@ -5,6 +5,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
 
 # Base tools + Python 3.12 via deadsnakes PPA (ubuntu 22.04 ships 3.10)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3.12 python3.12-venv python3.12-dev \
         ffmpeg libsndfile1 libgl1 \
         curl wget sudo ca-certificates \
+        tmux htop nvtop \
     && rm -rf /var/lib/apt/lists/*
 
 # devcontainer features (node/nvm) use `source` which requires bash, not dash

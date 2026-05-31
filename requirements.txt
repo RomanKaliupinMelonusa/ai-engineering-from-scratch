@@ -16,3 +16,7 @@ soundfile>=0.12
 tiktoken>=0.5
 anthropic>=0.25
 openai>=1.0
+safetensors>=0.4
+tensorboard>=2.14
+line_profiler>=4.1
+memory_profiler>=0.61
